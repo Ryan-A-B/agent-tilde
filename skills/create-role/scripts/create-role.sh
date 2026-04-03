@@ -5,12 +5,18 @@ workspace_root="${1:-.}"
 shift || true
 
 role_name=""
-role_description=""
+role_file=""
 
 usage() {
   cat <<'EOF'
 Usage:
-  create-role.sh <workspace-root> --name <role> --description <description>
+  create-role.sh <workspace-root> --name <role> --role-file <approved-role-md>
+
+This script performs the final scaffold step only:
+- creates roles/<role>/
+- writes ROLE.md from the approved file
+- copies MEMORY.md from skills/create-role/assets/MEMORY.md
+- creates skills/.gitkeep
 EOF
 }
 
@@ -20,8 +26,8 @@ while [[ $# -gt 0 ]]; do
       role_name="${2:-}"
       shift 2
       ;;
-    --description)
-      role_description="${2:-}"
+    --role-file)
+      role_file="${2:-}"
       shift 2
       ;;
     -h|--help)
@@ -42,17 +48,6 @@ slugify() {
     | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//; s/-+/-/g'
 }
 
-titleize() {
-  printf '%s' "$1" \
-    | tr '-' ' ' \
-    | awk '{
-        for (i = 1; i <= NF; i++) {
-          $i = toupper(substr($i, 1, 1)) substr($i, 2)
-        }
-        print
-      }'
-}
-
 role_name="$(slugify "$role_name")"
 
 if [[ -z "$role_name" ]]; then
@@ -61,14 +56,19 @@ if [[ -z "$role_name" ]]; then
   exit 1
 fi
 
-if [[ -z "$role_description" ]]; then
-  echo "Role description is required." >&2
+if [[ -z "$role_file" ]]; then
+  echo "Role file is required." >&2
   usage >&2
   exit 1
 fi
 
+if [[ ! -f "$role_file" ]]; then
+  echo "Role file not found: $role_file" >&2
+  exit 1
+fi
+
 role_dir="$workspace_root/roles/$role_name"
-assets_dir="$workspace_root/skills/create-role/assets"
+memory_template="$workspace_root/skills/create-role/assets/MEMORY.md"
 
 if [[ -e "$role_dir" ]]; then
   echo "Role already exists: $role_dir" >&2
@@ -76,15 +76,8 @@ if [[ -e "$role_dir" ]]; then
 fi
 
 mkdir -p "$role_dir/skills"
-cp "$assets_dir/MEMORY.md" "$role_dir/MEMORY.md"
-
-role_title="$(titleize "$role_name")"
-sed \
-  -e "s/^name: role-name$/name: $role_name/" \
-  -e "s/^description: Short description used for role selection\.$/description: $role_description/" \
-  -e "s/^# Role Name$/# $role_title/" \
-  "$assets_dir/ROLE.md" > "$role_dir/ROLE.md"
-
+cp "$role_file" "$role_dir/ROLE.md"
+cp "$memory_template" "$role_dir/MEMORY.md"
 : > "$role_dir/skills/.gitkeep"
 
 printf 'Created role: %s\n' "$role_dir"

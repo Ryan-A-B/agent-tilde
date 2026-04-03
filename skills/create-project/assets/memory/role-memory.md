@@ -1,23 +1,11 @@
-## Voice
+## Voice - tone, phrasing, writing corrections
 
-- Add project-specific voice preferences for this role here.
+## Process - how I want tasks to be done
 
-## Process
+## People - who people are, relationships
 
-- Add project-specific workflow preferences for this role here.
+## Projects - active work, current tasks, status
 
-## People
+## Output - formats, naming, delivery preferences
 
-- Add project-specific people notes for this role here.
-
-## Projects
-
-- Add project-specific priorities or patterns for this role here.
-
-## Output
-
-- Add project-specific output preferences for this role here.
-
-## Tools
-
-- Add project-specific tool usage guidance for this role here.
+## Tools - which tools to use and how

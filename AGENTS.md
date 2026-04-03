@@ -12,6 +12,24 @@ This workspace is a file-based system for working with distinct agent roles acro
 - If the project is unclear, ask. Do not guess.
 - If the role is unclear, inspect available roles and choose the best fit before continuing.
 
+## Bootstrap Operations
+
+Some requests are workspace bootstrap operations rather than normal role-scoped work.
+
+Bootstrap operations include:
+
+- creating a role
+- creating a project
+- creating a task
+- inspecting or improving the workspace scaffolding itself
+
+For bootstrap operations:
+
+- use the matching creation skill directly
+- do not block on choosing an existing role if no role has been created yet
+- do not treat an empty `roles/` or `projects/` directory as an error
+- prefer making a sensible first draft and asking the human to review it rather than front-loading too many questions
+
 ## Startup Routine
 
 1. Determine whether the session is task-based or direct work.
@@ -21,6 +39,7 @@ This workspace is a file-based system for working with distinct agent roles acro
 5. Determine the role:
    - For a task, prefer the task assignee.
    - Otherwise, read only the frontmatter `name` and `description` from each `roles/*/ROLE.md` file and choose the best fit.
+   - If this is a bootstrap operation such as `create-role`, `create-project`, or `create-task`, use that skill flow instead of trying to force normal role selection first.
 6. Once the role is selected, do not change it for the rest of the session.
 7. Load `roles/<role>/ROLE.md`.
 8. Load `roles/<role>/MEMORY.md`.
@@ -112,6 +131,8 @@ Each role lives under `roles/<role>/` and must contain:
 
 Use `ROLE.md` frontmatter for role discovery. Read only the frontmatter for unselected roles. Read the full file only for the chosen role.
 
+It is valid for `roles/` to be empty when the workspace is first created.
+
 ## Tasks
 
 Tasks are project-scoped. Some sessions may not use a task. Create a task when the work should be tracked, handed off, or resumed later.
@@ -137,6 +158,25 @@ Task rules:
 - move tasks to `archive/` only when the human decides to archive them
 
 If asked to work on a task and the task assignee does not match the active role, flag the mismatch.
+
+## Creation Skills
+
+The workspace should treat these skills as first-class bootstrap tools:
+
+- `create-role`
+- `create-project`
+- `create-task`
+
+When the user asks to create one of these objects, load the corresponding skill early.
+
+Default creation behavior:
+
+- keep roles broad and non-overlapping
+- write a sensible first draft when the request is straightforward
+- for role creation, show the proposed `ROLE.md` in chat before scaffolding
+- iterate on the draft in chat when needed
+- scaffold only after the human is happy with the draft
+- only stop to ask clarifying questions when the boundary is genuinely ambiguous or risky
 
 ## Worktrees
 

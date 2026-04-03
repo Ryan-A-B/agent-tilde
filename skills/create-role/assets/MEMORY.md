@@ -1,23 +1,11 @@
-## Voice
+## Voice - tone, phrasing, writing corrections
 
-- Add role-specific voice and phrasing preferences here.
+## Process - how I want tasks to be done
 
-## Process
+## People - who people are, relationships
 
-- Add durable process preferences here.
+## Projects - active work, current tasks, status
 
-## People
+## Output - formats, naming, delivery preferences
 
-- Add durable people and relationship notes here.
-
-## Projects
-
-- Add durable project-related patterns here.
-
-## Output
-
-- Add output and delivery preferences here.
-
-## Tools
-
-- Add durable tool usage preferences here.
+## Tools - which tools to use and how

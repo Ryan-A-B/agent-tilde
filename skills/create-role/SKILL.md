@@ -1,17 +1,18 @@
 # Create Role
 
-Scaffold a new role under `roles/<role>/`.
+Draft and scaffold a new role under `roles/<role>/`.
 
 ## Responsibilities
 
 - interview the human before any scaffolding happens
 - encourage broad, stable, non-overlapping role definitions
-- create `ROLE.md`
-- create `MEMORY.md`
-- create `skills/`
-- ensure `skills/.gitkeep` exists
-- use the templates in `skills/create-role/assets/`
-- call the scaffold script only after the role name and description are clear
+- default to a one-shot first draft when the requested role is straightforward
+- display a proposed `ROLE.md` draft before writing files
+- iterate on the draft in conversation until the human is happy
+- create `ROLE.md`, `MEMORY.md`, and `skills/` only after the draft is accepted
+- use `references/examples/` for broad example roles when useful
+- keep `MEMORY.md` static from `skills/create-role/assets/MEMORY.md`
+- call the script only for the final write step after approval
 
 ## Inputs
 
@@ -23,6 +24,16 @@ Scaffold a new role under `roles/<role>/`.
 ## Interview Guidance
 
 Before scaffolding, help the human avoid overly narrow or overlapping roles.
+
+Default behavior:
+
+- if the requested role is broad and clear, draft it directly from the role name and a sensible default scope
+- use `references/examples/` as input when they help
+- show the draft in chat
+- refine it if needed
+- scaffold the role only after the human approves the draft
+
+Do not force a detailed questionnaire for obvious broad roles such as `marketer`, `developer`, `qa`, or `support`.
 
 The interview should aim to clarify:
 
@@ -39,7 +50,7 @@ Avoid creating roles that are:
 - likely to overlap heavily with an existing role
 - better modeled as skills, workflows, or project-specific memory
 
-Do not push the interview into the script. The agent should gather the answers, challenge weak role boundaries, and then call `scripts/create-role.sh` with explicit arguments.
+Do not push the interview or drafting into the script. The agent should gather the answers only when needed, challenge weak role boundaries, draft the `ROLE.md` in chat, and then call `scripts/create-role.sh` only to write the approved files.
 
 ## Output
 
