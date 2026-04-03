@@ -30,22 +30,35 @@ For bootstrap operations:
 - do not treat an empty `roles/` or `projects/` directory as an error
 - prefer making a sensible first draft and asking the human to review it rather than front-loading too many questions
 
+## Workspace Skills
+
+This workspace defines local file-based skills under `skills/`.
+
+These workspace skills should be treated like installed skills for bootstrap purposes:
+
+- immediately after reading `AGENTS.md`, load the frontmatter `name` and `description` from every `skills/*/SKILL.md`
+- use those frontmatter summaries to decide which workspace skill to load next
+- treat the workspace skills as authoritative local workflow definitions, not as optional discoveries
+
+Use `scripts/list_skills.sh` to surface local skill frontmatter when needed.
+
 ## Startup Routine
 
 1. Determine whether the session is task-based or direct work.
-2. If the user named a task, open the task first.
-3. Determine the project from the task path or from the user's request.
-4. If the project is unclear, ask before loading project context.
-5. Determine the role:
+2. Load local skill frontmatter from `skills/*/SKILL.md`.
+3. If the user named a task, open the task first.
+4. Determine the project from the task path or from the user's request.
+5. If the project is unclear, ask before loading project context.
+6. Determine the role:
    - For a task, prefer the task assignee.
    - Otherwise, read only the frontmatter `name` and `description` from each `roles/*/ROLE.md` file and choose the best fit.
    - If this is a bootstrap operation such as `create-role`, `create-project`, or `create-task`, use that skill flow instead of trying to force normal role selection first.
-6. Once the role is selected, do not change it for the rest of the session.
-7. Load `roles/<role>/ROLE.md`.
-8. Load `roles/<role>/MEMORY.md`.
-9. Load `projects/<project>/PROJECT.md`.
-10. Load `projects/<project>/memory/<role>.md` if it exists.
-11. If working on a task, read `TASK.md` and any relevant files in `notes/`, `handoffs/`, and `artifacts/`.
+7. Once the role is selected, do not change it for the rest of the session.
+8. Load `roles/<role>/ROLE.md`.
+9. Load `roles/<role>/MEMORY.md`.
+10. Load `projects/<project>/PROJECT.md`.
+11. Load `projects/<project>/memory/<role>.md` if it exists.
+12. If working on a task, read `TASK.md` and any relevant files in `notes/`, `handoffs/`, and `artifacts/`.
 
 ## Scope Guidance
 
@@ -168,6 +181,8 @@ The workspace should treat these skills as first-class bootstrap tools:
 - `create-task`
 
 When the user asks to create one of these objects, load the corresponding skill early.
+
+Do not narrate this as discovering a possible local skill. Treat it as the expected workflow for this workspace.
 
 Default creation behavior:
 

@@ -1,3 +1,8 @@
+---
+name: create-project
+description: Interview for and scaffold a new project in projects/, optionally pulling in existing repositories after the project shape is clear.
+---
+
 # Create Project
 
 Scaffold a new project under `projects/<project>/`.

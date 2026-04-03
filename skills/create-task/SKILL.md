@@ -1,3 +1,8 @@
+---
+name: create-task
+description: Gather task details and scaffold a new project task in tasks/active/, creating TASK.md plus notes, handoffs, and artifacts folders.
+---
+
 # Create Task
 
 Create a new task inside a project.

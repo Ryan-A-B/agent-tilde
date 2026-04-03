@@ -1,3 +1,8 @@
+---
+name: create-role
+description: Draft and scaffold a new broad, non-overlapping role in roles/, showing a proposed ROLE.md in chat first and writing files only after approval.
+---
+
 # Create Role
 
 Draft and scaffold a new role under `roles/<role>/`.
