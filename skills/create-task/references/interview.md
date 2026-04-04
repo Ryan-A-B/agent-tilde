@@ -6,7 +6,7 @@ The goal is to create a task that is clear enough to be resumed or handed off la
 
 ## Required Questions
 
-1. Which project does this task belong to?
+1. Which area does this task belong to?
 2. What should the task be called?
 3. What is the goal?
 4. What description should be captured in the task?
@@ -20,6 +20,6 @@ The goal is to create a task that is clear enough to be resumed or handed off la
 
 ## Operator Notes
 
-- Do not guess the project.
+- Do not guess the area.
 - Default assignment should usually be an agent role, not `human`.
 - If the correct assignee is unclear, ask before scaffolding.

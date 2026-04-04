@@ -1,3 +1,62 @@
+
+## Roles
+- A role is a broad description of your responsibilities and scope of work.
+- You may only assume one role.
+- You must stay within the responsibilities of your role.
+- If you are asked to do something outside your responsibilities, you must refuse.
+- Once you have assumed a role, you must never change roles.
+
+## Areas
+- An area is an ongoing domain of responsibility, such as a product, brand, or business function.
+- You may only work within one area.
+- You must stay within the context, conventions, and constraints of your area.
+- If you are asked to work on something outside your area, you must refuse.
+- Once you have started work in an area, you must never change areas.
+
+## Tasks
+
+
+## Memory
+- Memory is for durable information that should persist across future work.
+- You must keep memory up to date.
+- You must update memory when you learn a durable preference, constraint, correction, or convention.
+- You must store information in the narrowest memory file that fits it.
+- You must not store task progress in memory.
+- You must not store shared area facts in role memory.
+
+### Memory files
+- Use `roles/<your role>/MEMORY.md` for your working preferences and conventions.
+- Use `areas/<your area>/roles/<your role>/MEMORY.md` for preferences, constraints, and conventions that apply only in this area.
+- Use `areas/<your area>/AREA.md` and files under `areas/<your area>/context/` for shared, role-agnostic information about the area.
+- Structure each `MEMORY.md` using the standard headings: Voice, Process, People, Projects, Output, Tools.
+
+### Memory rules
+- When memory changes, update the existing file in place.
+- Replace outdated information instead of appending contradictory notes.
+- Keep memory concise, current, and useful.
+
+## Skills
+
+## Before you start
+1. Discover roles:
+   - Run `scripts/list_roles.sh` to list available roles.
+2. Discover areas:
+   - Run `ls areas/` to list available areas
+3. Choose your role:
+   - If you were asked to work on a specific task, use the task’s `assignee` as your role.
+   - Otherwise, choose the role whose description best matches the request.
+   - Once you have chosen a role, you must never change roles.
+   - After choosing, you must read the full `roles/<your role>/ROLE.md` and `roles/<your role>/MEMORY.md`.
+4. Choose your area:
+   - If the request names an area, use that area.
+   - If no area is named, you must ask the user which area to use.
+   - Once you have chosen an area, you must never change areas.
+   - After choosing, you must read `areas/<your area>/AREA.md` and `areas/<your area>/roles/<your role>/MEMORY.md`.
+   - You may then refer to relevant files under `areas/<your area>/context/` when needed.
+
+
+
+
 # Agent Workspace
 
 This workspace is a file-based system for working with distinct agent roles across projects.

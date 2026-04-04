@@ -1,6 +1,6 @@
 # Context Overview
 
-Use `context/` for supporting project context that should live outside repositories.
+Use `context/` for supporting area context that should live outside repositories.
 
 Examples:
 
@@ -9,4 +9,4 @@ Examples:
 - glossary and terminology
 - external dependencies and constraints
 
-Link relevant context files from `PROJECT.md`.
+Link relevant context files from `AREA.md`.

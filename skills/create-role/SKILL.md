@@ -53,7 +53,7 @@ Avoid creating roles that are:
 
 - too narrow
 - likely to overlap heavily with an existing role
-- better modeled as skills, workflows, or project-specific memory
+- better modeled as skills, workflows, or area-specific memory
 
 Do not push the interview or drafting into the script. The agent should gather the answers only when needed, challenge weak role boundaries, draft the `ROLE.md` in chat, and then call `scripts/create-role.sh` only to write the approved files.
 

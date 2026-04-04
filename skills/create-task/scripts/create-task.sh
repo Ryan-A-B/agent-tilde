@@ -4,7 +4,7 @@ set -euo pipefail
 workspace_root="${1:-.}"
 shift || true
 
-project_name=""
+area_name=""
 task_name=""
 goal=""
 description=""
@@ -15,7 +15,7 @@ declare -a relevant_repos=()
 usage() {
   cat <<'EOF'
 Usage:
-  create-task.sh <workspace-root> --project <project> --name <task-name> --goal <goal> --description <description> --assignee <assignee> [options]
+  create-task.sh <workspace-root> --area <area> --name <task-name> --goal <goal> --description <description> --assignee <assignee> [options]
 
 Options:
   --priority <priority>
@@ -25,8 +25,8 @@ EOF
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --project)
-      project_name="${2:-}"
+    --area)
+      area_name="${2:-}"
       shift 2
       ;;
     --name)
@@ -72,7 +72,7 @@ slugify() {
 }
 
 next_task_id() {
-  local project_dir="$1"
+  local area_dir="$1"
   local max_id="0"
   local name
   while IFS= read -r name; do
@@ -82,20 +82,20 @@ next_task_id() {
         max_id="${BASH_REMATCH[1]}"
       fi
     fi
-  done < <(find "$project_dir/tasks" -mindepth 2 -maxdepth 2 -type d | sort)
+  done < <(find "$area_dir/tasks" -mindepth 2 -maxdepth 2 -type d | sort)
   printf '%05d' "$((10#$max_id + 1))"
 }
 
-project_dir="$workspace_root/projects/$project_name"
+area_dir="$workspace_root/areas/$area_name"
 
-if [[ -z "$project_name" ]]; then
-  echo "Project name is required." >&2
+if [[ -z "$area_name" ]]; then
+  echo "area name is required." >&2
   usage >&2
   exit 1
 fi
 
-if [[ ! -d "$project_dir" ]]; then
-  echo "Project does not exist: $project_dir" >&2
+if [[ ! -d "$area_dir" ]]; then
+  echo "area does not exist: $area_dir" >&2
   exit 1
 fi
 
@@ -111,8 +111,8 @@ if [[ -z "$task_slug" ]]; then
   exit 1
 fi
 
-task_id="$(next_task_id "$project_dir")"
-task_dir="$project_dir/tasks/active/$task_id-$task_slug"
+task_id="$(next_task_id "$area_dir")"
+task_dir="$area_dir/tasks/active/$task_id-$task_slug"
 assets_dir="$workspace_root/skills/create-task/assets"
 
 mkdir -p "$task_dir/notes" "$task_dir/handoffs" "$task_dir/artifacts"

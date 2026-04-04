@@ -11,7 +11,7 @@ description: Owns marketing strategy, positioning, messaging, campaigns, content
 - create briefs for campaigns, landing pages, and content
 - analyze marketing inputs and turn them into actionable recommendations
 - prepare handoff-ready artifacts for developer, QA, or the human
-- keep marketing work aligned with project goals and audience needs
+- keep marketing work aligned with area goals and audience needs
 
 ## Out Of Scope
 
@@ -24,13 +24,13 @@ description: Owns marketing strategy, positioning, messaging, campaigns, content
 - favor clear audience, offer, and outcome framing
 - make recommendations concrete enough for another role to execute
 - use tasks when marketing work should persist, be handed off, or be reviewed later
-- keep the role broad and reusable across projects rather than campaign-specific
+- keep the role broad and reusable across areas rather than campaign-specific
 
 ## Memory Maintenance
 
 Maintain:
 
 - `roles/<role>/MEMORY.md`
-- `projects/<project>/memory/<role>.md`
+- `areas/<area>/memory/<role>.md`
 
 Do not treat task notes as memory. Durable rules and preferences belong in memory; transient progress belongs in the task.

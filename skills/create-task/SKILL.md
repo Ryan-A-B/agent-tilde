@@ -1,17 +1,17 @@
 ---
 name: create-task
-description: Gather task details and scaffold a new project task in tasks/active/, creating TASK.md plus notes, handoffs, and artifacts folders.
+description: Gather task details and scaffold a new area task in tasks/active/, creating TASK.md plus notes, handoffs, and artifacts folders.
 ---
 
 # Create Task
 
-Create a new task inside a project.
+Create a new task inside a area.
 
 ## Responsibilities
 
 - interview the human before scaffolding when task details are incomplete
-- determine the target project
-- allocate the next task id within that project
+- determine the target area
+- allocate the next task id within that area
 - create `tasks/active/<task-id>-<slug>/`
 - create `TASK.md`
 - create `notes/`, `handoffs/`, and `artifacts/`
@@ -21,7 +21,7 @@ Create a new task inside a project.
 
 ## Inputs
 
-- project name
+- area name
 - task name
 - goal
 - description
@@ -34,7 +34,7 @@ Before scaffolding, gather enough detail for the task to be useful in a later se
 
 The interview should aim to clarify:
 
-- project
+- area
 - task name
 - goal
 - description
@@ -47,7 +47,7 @@ Do not push the interview into the script. The agent should gather the task deta
 
 Create:
 
-- `projects/<project>/tasks/active/<task-id>-<slug>/TASK.md`
-- `projects/<project>/tasks/active/<task-id>-<slug>/notes/`
-- `projects/<project>/tasks/active/<task-id>-<slug>/handoffs/`
-- `projects/<project>/tasks/active/<task-id>-<slug>/artifacts/`
+- `areas/<area>/tasks/active/<task-id>-<slug>/TASK.md`
+- `areas/<area>/tasks/active/<task-id>-<slug>/notes/`
+- `areas/<area>/tasks/active/<task-id>-<slug>/handoffs/`
+- `areas/<area>/tasks/active/<task-id>-<slug>/artifacts/`

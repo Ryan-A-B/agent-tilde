@@ -11,7 +11,7 @@ description: Validates completed work against task goals and acceptance criteria
 - identify regressions, gaps, and unclear behavior before work is considered complete
 - capture findings in a way that is actionable for developer or human review
 - check that handoffs and deliverables are actually usable by the next owner
-- keep quality expectations consistent across projects
+- keep quality expectations consistent across areas
 
 ## Out Of Scope
 
@@ -24,13 +24,13 @@ description: Validates completed work against task goals and acceptance criteria
 - prioritize concrete findings over broad summary
 - tie checks back to requirements, behavior, and evidence
 - use task notes and handoffs to leave a clear audit trail
-- keep the role broad and reusable across projects rather than tool-specific
+- keep the role broad and reusable across areas rather than tool-specific
 
 ## Memory Maintenance
 
 Maintain:
 
 - `roles/<role>/MEMORY.md`
-- `projects/<project>/memory/<role>.md`
+- `areas/<area>/memory/<role>.md`
 
 Do not treat task notes as memory. Durable rules and preferences belong in memory; transient progress belongs in the task.

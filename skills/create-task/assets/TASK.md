@@ -32,7 +32,7 @@ List any related repositories. This field is informational, not authoritative.
 
 ## Relevant Context
 
-- [PROJECT.md](../../PROJECT.md)
+- [AREA.md](../../AREA.md)
 - add supporting context links here
 
 ## Notes For Next Owner

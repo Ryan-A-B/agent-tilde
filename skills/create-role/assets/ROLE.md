@@ -22,6 +22,6 @@ description: Short description used for role selection.
 Maintain:
 
 - `roles/<role>/MEMORY.md`
-- `projects/<project>/memory/<role>.md`
+- `areas/<area>/memory/<role>.md`
 
 Do not treat task notes as memory. Durable rules and preferences belong in memory; transient progress belongs in the task.

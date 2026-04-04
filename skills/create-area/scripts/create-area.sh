@@ -4,8 +4,8 @@ set -euo pipefail
 workspace_root="${1:-.}"
 shift || true
 
-project_name=""
-project_purpose=""
+area_name=""
+area_purpose=""
 audience=""
 constraints=""
 workflow_hints=""
@@ -14,7 +14,7 @@ declare -a repo_specs=()
 usage() {
   cat <<'EOF'
 Usage:
-  create-project.sh <workspace-root> --name <project> --purpose <purpose> --audience <audience> [options]
+  create-area.sh <workspace-root> --name <area> --purpose <purpose> --audience <audience> [options]
 
 Options:
   --constraints <text>
@@ -26,11 +26,11 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --name)
-      project_name="${2:-}"
+      area_name="${2:-}"
       shift 2
       ;;
     --purpose)
-      project_purpose="${2:-}"
+      area_purpose="${2:-}"
       shift 2
       ;;
     --audience)
@@ -68,7 +68,7 @@ slugify() {
 }
 
 copy_role_memories() {
-  local project_dir="$1"
+  local area_dir="$1"
   local assets_dir="$2"
   local role_dir
   for role_dir in "$workspace_root"/roles/*; do
@@ -76,18 +76,18 @@ copy_role_memories() {
     local role_name
     role_name="$(basename "$role_dir")"
     sed "s/this role/$role_name role/g" \
-      "$assets_dir/memory/role-memory.md" > "$project_dir/memory/$role_name.md"
+      "$assets_dir/memory/role-memory.md" > "$area_dir/memory/$role_name.md"
   done
 }
 
 append_repo_entry() {
-  local project_md="$1"
+  local area_md="$1"
   local repo_name="$2"
   local repo_note="$3"
-  if grep -Fq "\`repos/$repo_name/\`" "$project_md"; then
+  if grep -Fq "\`repos/$repo_name/\`" "$area_md"; then
     return
   fi
-  printf '\n- `repos/%s/`: %s\n' "$repo_name" "$repo_note" >> "$project_md"
+  printf '\n- `repos/%s/`: %s\n' "$repo_name" "$repo_note" >> "$area_md"
 }
 
 import_repo() {
@@ -115,23 +115,23 @@ import_repo() {
   printf '%s\n' "$name"
 }
 
-project_name="$(slugify "$project_name")"
+area_name="$(slugify "$area_name")"
 
-if [[ -z "$project_name" ]]; then
+if [[ -z "$area_name" ]]; then
   echo "Project name cannot be empty." >&2
   usage >&2
   exit 1
 fi
 
-project_dir="$workspace_root/projects/$project_name"
-assets_dir="$workspace_root/skills/create-project/assets"
+area_dir="$workspace_root/areas/$area_name"
+assets_dir="$workspace_root/skills/create-area/assets"
 
-if [[ -e "$project_dir" ]]; then
-  echo "Project already exists: $project_dir" >&2
+if [[ -e "$area_dir" ]]; then
+  echo "Project already exists: $area_dir" >&2
   exit 1
 fi
 
-if [[ -z "$project_purpose" ]]; then
+if [[ -z "$area_purpose" ]]; then
   echo "Project purpose is required." >&2
   usage >&2
   exit 1
@@ -144,36 +144,36 @@ if [[ -z "$audience" ]]; then
 fi
 
 mkdir -p \
-  "$project_dir/context" \
-  "$project_dir/memory" \
-  "$project_dir/skills" \
-  "$project_dir/tasks/active" \
-  "$project_dir/tasks/archive" \
-  "$project_dir/repos" \
-  "$project_dir/worktrees"
+  "$area_dir/context" \
+  "$area_dir/memory" \
+  "$area_dir/skills" \
+  "$area_dir/tasks/active" \
+  "$area_dir/tasks/archive" \
+  "$area_dir/repos" \
+  "$area_dir/worktrees"
 
-cp "$assets_dir/PROJECT.md" "$project_dir/PROJECT.md"
-cp "$assets_dir/context/README.md" "$project_dir/context/README.md"
-copy_role_memories "$project_dir" "$assets_dir"
+cp "$assets_dir/AREA.md" "$area_dir/AREA.md"
+cp "$assets_dir/context/README.md" "$area_dir/context/README.md"
+copy_role_memories "$area_dir" "$assets_dir"
 
-: > "$project_dir/skills/.gitkeep"
-: > "$project_dir/tasks/active/.gitkeep"
-: > "$project_dir/tasks/archive/.gitkeep"
-: > "$project_dir/repos/.gitkeep"
-: > "$project_dir/worktrees/.gitkeep"
+: > "$area_dir/skills/.gitkeep"
+: > "$area_dir/tasks/active/.gitkeep"
+: > "$area_dir/tasks/archive/.gitkeep"
+: > "$area_dir/repos/.gitkeep"
+: > "$area_dir/worktrees/.gitkeep"
 
 sed -i \
-  -e "s/^# Project Name$/# $project_name/" \
-  -e "/^Describe what this project is for and what outcomes matter\.$/c\\$project_purpose" \
+  -e "s/^# Project Name$/# $area_name/" \
+  -e "/^Describe what this area is for and what outcomes matter\.$/c\\$area_purpose" \
   -e "/^## Conventions$/a\\\n- Audience: $audience" \
-  "$project_dir/PROJECT.md"
+  "$area_dir/AREA.md"
 
 if [[ -n "$constraints" ]]; then
-  printf '\n- Constraints: %s\n' "$constraints" >> "$project_dir/PROJECT.md"
+  printf '\n- Constraints: %s\n' "$constraints" >> "$area_dir/AREA.md"
 fi
 
 if [[ -n "$workflow_hints" ]]; then
-  local_memory_files=("$project_dir"/memory/*.md)
+  local_memory_files=("$area_dir"/memory/*.md)
   for memory_file in "${local_memory_files[@]}"; do
     printf '\n- Workflow hints: %s\n' "$workflow_hints" >> "$memory_file"
   done
@@ -181,9 +181,9 @@ fi
 
 if [[ ${#repo_specs[@]} -gt 0 ]]; then
   while IFS= read -r spec; do
-    repo_name="$(import_repo "$spec" "$project_dir/repos")"
-    append_repo_entry "$project_dir/PROJECT.md" "$repo_name" "Imported repository."
+    repo_name="$(import_repo "$spec" "$area_dir/repos")"
+    append_repo_entry "$area_dir/AREA.md" "$repo_name" "Imported repository."
   done < <(printf '%s\n' "${repo_specs[@]}")
 fi
 
-printf 'Created project: %s\n' "$project_dir"
+printf 'Created area: %s\n' "$area_dir"

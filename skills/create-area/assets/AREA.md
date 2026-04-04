@@ -1,8 +1,8 @@
-# Project Name
+# Area Name
 
 ## Purpose
 
-Describe what this project is for and what outcomes matter.
+Describe what this area is for and what outcomes matter.
 
 ## Repositories
 
@@ -10,11 +10,11 @@ Describe what this project is for and what outcomes matter.
 
 ## Context
 
-- [context/](context/): supporting project context files
+- [context/](context/): supporting area context files
 
 ## Conventions
 
-- Add high-level project conventions here.
+- Add high-level area conventions here.
 
 ## Active Concerns
 
