@@ -1,21 +1,21 @@
-# Area Name
+# Area
 
-## Purpose
+## Purpose - why this area exists
+Describe the ongoing responsibility and what “healthy” looks like for this area.
 
-Describe what this area is for and what outcomes matter.
+## Scope - what belongs here
+Clarify what is in scope and out of scope for this area.
 
-## Repositories
+## Standards - rules that always apply
+List durable constraints, policies, and quality bars for work in this area.
 
-- `repos/<repo-name>/`: explain what this repository is for
+## References - where to find more context
+Link to important files in `areas/<area>/context/` and elsewhere, with a short note for each.
 
-## Context
+- `context/...` - what this file contains and when to read it.
+- `context/...` - why this file matters to this area.
 
-- [context/](context/): supporting area context files
+## Skills - reusable workflows for this area
+List any area-specific skills and when to use them.
 
-## Conventions
-
-- Add high-level area conventions here.
-
-## Active Concerns
-
-- Add active high-level concerns or priorities here.
+- `skills/...` - when this skill is appropriate.
