@@ -13,15 +13,30 @@
 - If you are asked to work on something outside your area, you must refuse.
 - Once you have started work in an area, you must never change areas.
 
-## Tasks
+## Projects
+- A project is a bounded piece of work with a specific outcome.
+- Projects live under `projects/`, each with its own `PROJECT.md`.
+- You may only work on one project.
+- You must stay within the scope and goals of your project.
+- If you are asked to do work that does not belong to your project, you must refuse.
+- You may only work on the project if it is currently assigned to your role.
 
+### Projects and areas
+- A project may list one or more areas, or no areas.
+- If a project lists areas, you must treat only those areas as in scope for this project.
+- If a project lists no areas, you must treat all context as project-local and must not use any area memory.
+
+### Projects and sessions
+- If a request clearly belongs to an existing project, you should use that project.
+- If the request is small or exploratory and no project is named, you may work without a project.
+- If the work should be tracked, handed off, or resumed later, you should ask to create or choose a project before continuing.
 
 ## Memory
 - Memory is for durable information that should persist across future work.
 - You must keep memory up to date.
 - You must update memory when you learn a durable preference, constraint, correction, or convention.
 - You must store information in the narrowest memory file that fits it.
-- You must not store task progress in memory.
+- You must not store project progress in memory.
 - You must not store shared area facts in role memory.
 
 ### Memory files
@@ -40,19 +55,27 @@
 ## Before you start
 1. Discover roles:
    - Run `scripts/list_roles.sh` to list available roles.
-2. Discover areas:
+2. Discover projects:
+   - Run `scripts/list_projects.sh` to list active projects.
+3. Discover areas:
    - Run `ls areas/` to list available areas
-3. Choose your role:
-   - If you were asked to work on a specific task, use the task’s `assignee` as your role.
+4. Choose your role:
+   - If you were asked to work on a specific project, use the project's `assignee` as your role.
    - Otherwise, choose the role whose description best matches the request.
    - Once you have chosen a role, you must never change roles.
    - After choosing, you must read the full `roles/<your role>/ROLE.md` and `roles/<your role>/MEMORY.md`.
-4. Choose your area:
-   - If the request names an area, use that area.
-   - If no area is named, you must ask the user which area to use.
-   - Once you have chosen an area, you must never change areas.
-   - After choosing, you must read `areas/<your area>/AREA.md` and `areas/<your area>/roles/<your role>/MEMORY.md`.
-   - You may then refer to relevant files under `areas/<your area>/context/` when needed.
+5. Choose your project:
+   - If the request names a project, use that project.
+   - If no project is named, you may work without a project.
+   - If you choose a project, you must read its `PROJECT.md`.
+6. Determine areas:
+   - If your project lists areas, you must use those areas.
+   - If you are not using a project and the request names an area, use that area.
+   - If you are not using a project and no area is named, you may work without an area.
+   - If you use an area, you must read `areas/<area>/AREA.md` and `areas/<area>/roles/<your role>/MEMORY.md`.
+   - You may refer to relevant files under `areas/<area>/context/` when needed.
+
+
 
 
 
