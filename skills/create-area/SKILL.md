@@ -9,6 +9,8 @@ Use this skill when the user wants to create a new area.
 
 An area is an ongoing domain of responsibility, such as a product, brand, or business function. When appropriate, name areas using the pattern `<product>:<function>`.
 
+Use `references/AREA.md` as the canonical guide for the structure and content of `AREA.md`.
+
 ## Goals
 
 - Create a clear, durable area entrypoint.
