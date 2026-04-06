@@ -1,8 +1,3 @@
----
-name: role-name
-description: Short description used for role selection.
----
-
 # Role Name
 
 ## Responsibilities
