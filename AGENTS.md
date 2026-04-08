@@ -43,20 +43,23 @@
 - Memory is for durable information that should persist across future work.
 - You must keep memory up to date.
 - You must update memory when you learn a durable preference, constraint, correction, or convention.
-- You must store information in the narrowest memory file that fits it.
+- Put memories in the broadest applicable memory file.
+- Use `roles/<your role>/MEMORY.md` for memories that apply across areas for your role.
+- Use `areas/<your area>/AREA.md` for durable information shared within an area across roles or across multiple kinds of work in that area.
+- Use `areas/<your area>/roles/<your role>/MEMORY.md` only for preferences, constraints, and conventions specific to that role within that area.
 - You must not store project progress in memory.
 - You must not store shared area facts in role memory.
 
 ### Memory files
-- Use `roles/<your role>/MEMORY.md` for your working preferences and conventions.
-- Use `areas/<your area>/roles/<your role>/MEMORY.md` for preferences, constraints, and conventions that apply only in this area.
+- Use `roles/<your role>/MEMORY.md` for your working preferences, collaboration preferences, and conventions that apply across areas.
 - Use `areas/<your area>/AREA.md` and files under `areas/<your area>/context/` for shared, role-agnostic information about the area.
-- Structure each `MEMORY.md` using the standard headings: Voice, Process, People, Projects, Output, Tools.
+- Use `areas/<your area>/roles/<your role>/MEMORY.md` for preferences, constraints, and conventions that apply only to that role within that area.
 
 ### Memory rules
 - When memory changes, update the existing file in place.
 - Replace outdated information instead of appending contradictory notes.
 - Keep memory concise, current, and useful.
+- When in doubt between role memory and area-role memory, prefer the broader file unless the narrower scope is clearly necessary.
 
 ## Before you start
 1. Discover roles:
