@@ -82,7 +82,7 @@ If no areas are provided, leave it as an empty block rather than inventing entri
 - Run the script in this form:
 
   ```bash
-  <PROJECT.md body> | scripts/create-project.sh <project-name> <project-title> <project-description> <assignee> [area ...]
+  <PROJECT.md body> | <skill dir>/scripts/create-project.sh <project-name> <project-title> <project-description> <assignee> [area ...]
   ```
 
 - Pass the confirmed project directory name as the first argument.

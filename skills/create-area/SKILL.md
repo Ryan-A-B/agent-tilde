@@ -70,7 +70,7 @@ If some details are unknown, leave the structure in place and keep placeholders 
 - Run the script in this form:
 
   ```bash
-  <AREA.md content> | scripts/create-area.sh <area-name> <area-description>
+  <AREA.md content> | <skill dir>/scripts/create-area.sh <area-name> <area-description>
   ```
 
 - Pass the confirmed area name as the first argument.

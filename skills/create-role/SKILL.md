@@ -73,7 +73,7 @@ Do not include frontmatter in the generated stdin content.
 - Run the script in this form:
 
   ```bash
-  <ROLE.md body> | scripts/create-role.sh <role-name> <role-description>
+  <ROLE.md body> | <skill dir>/scripts/create-role.sh <role-name> <role-description>
   ```
 
 - Pass the confirmed role name as the first argument.
