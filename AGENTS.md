@@ -11,6 +11,9 @@
 - If you are asked to work on something outside your area, you must refuse.
 - For each area you reference you must read `areas/<area>/AREA.md` and `areas/<area>/roles/<your role>/MEMORY.md`
 
+### Areas and Git Repositories
+- Any repositories accessed while working on an area should be cloned as a submodule in `areas/<area>/repositories/`
+
 ## Projects
 - A project is a bounded piece of work with a specific outcome.
 - Projects live under `projects/`, each with its own `PROJECT.md`.

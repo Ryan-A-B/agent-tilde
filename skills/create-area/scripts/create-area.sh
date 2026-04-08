@@ -13,9 +13,10 @@ area_file="$area_dir/AREA.md"
 
 body="$(cat)"
 
-mkdir -p "$area_dir/context" "$area_dir/roles"
+mkdir -p "$area_dir/context" "$area_dir/roles" "$area_dir/repositories"
 : > "$area_dir/context/.gitkeep"
 : > "$area_dir/roles/.gitkeep"
+: > "$area_dir/repositories/.gitkeep"
 
 cat > "$area_file" <<EOF2
 ---
