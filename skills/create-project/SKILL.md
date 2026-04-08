@@ -53,8 +53,11 @@ Use `assets/NOTES.md` as the template for `projects/<project>/NOTES.md` when it 
 If it does not exist, create an empty `NOTES.md`.
 
 Create `projects/<project>/PROJECT.md` as a sensible first draft based on the user request.
-Populate the frontmatter and sections with a sensible first draft based on the user request.
+Populate the body sections with a sensible first draft based on the user request.
 If some details are unknown, leave the structure in place and keep placeholders minimal and obvious.
+
+The script is responsible for writing the frontmatter.
+Do not include frontmatter in the generated stdin content.
 
 The `areas:` frontmatter field must always be present.
 If no areas are provided, leave it as an empty block rather than inventing entries.
@@ -69,17 +72,17 @@ If no areas are provided, leave it as an empty block rather than inventing entri
 ## Behavior
 
 - Propose a project name if the user has not given one.
-- Show the proposed project name and draft `PROJECT.md`, and ask the user to confirm them.
+- Show the proposed project name and draft `PROJECT.md` body, and ask the user to confirm them.
 - Do not scaffold anything until the project name is confirmed.
 - If areas are relevant but not explicitly given, infer them conservatively or leave the field empty.
 
 ## Scaffolding
 
-- After the user confirms the project name, pipe the generated `PROJECT.md` content into `scripts/create-project.sh`.
+- After the user confirms the project name, pipe the generated `PROJECT.md` body into `scripts/create-project.sh`.
 - Run the script in this form:
 
   ```bash
-  <PROJECT.md content> | scripts/create-project.sh <project-name> <project-title> <project-description> <assignee> [area ...]
+  <PROJECT.md body> | scripts/create-project.sh <project-name> <project-title> <project-description> <assignee> [area ...]
   ```
 
 - Pass the confirmed project directory name as the first argument.
@@ -87,4 +90,4 @@ If no areas are provided, leave it as an empty block rather than inventing entri
 - Pass the short project description as the third argument.
 - Pass the assignee as the fourth argument.
 - Pass any area names as remaining arguments.
-- Pass the full `PROJECT.md` document on stdin.
+- Pass only the markdown body on stdin. Do not pass frontmatter.

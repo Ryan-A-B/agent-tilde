@@ -46,8 +46,11 @@ Use `assets/MEMORY.md` as the template for `roles/<role>/MEMORY.md`.
 If it does not exist, create an empty `MEMORY.md`.
 
 Create `roles/<role>/ROLE.md` as a sensible first draft based on the user request.
-Populate the frontmatter and sections with a sensible first draft based on the user request.
+Populate the body sections with a sensible first draft based on the user request.
 If some details are unknown, leave the structure in place and keep placeholders minimal and obvious.
+
+The script is responsible for writing the frontmatter.
+Do not include frontmatter in the generated stdin content.
 
 ## Naming
 
@@ -60,19 +63,19 @@ If some details are unknown, leave the structure in place and keep placeholders 
 ## Behavior
 
 - Propose a role name if the user has not given one.
-- Show the proposed role name and draft `ROLE.md`, and ask the user to confirm them.
+- Show the proposed role name and draft `ROLE.md` body, and ask the user to confirm them.
 - Do not scaffold anything until the role name is confirmed.
 - Keep the role reusable; avoid overfitting it to a single project unless the user explicitly wants a project-specific role.
 
 ## Scaffolding
 
-- After the user confirms the role name, pipe the generated `ROLE.md` content into `scripts/create-role.sh`.
+- After the user confirms the role name, pipe the generated `ROLE.md` body into `scripts/create-role.sh`.
 - Run the script in this form:
 
   ```bash
-  <ROLE.md content> | scripts/create-role.sh <role-name> <role-description>
+  <ROLE.md body> | scripts/create-role.sh <role-name> <role-description>
   ```
 
 - Pass the confirmed role name as the first argument.
 - Pass the short role description as the second argument.
-- Pass the full `ROLE.md` document on stdin.
+- Pass only the markdown body on stdin. Do not pass frontmatter.
