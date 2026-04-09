@@ -13,5 +13,7 @@ Important domain knowledge and constraints that are stable over time, not tied t
 ## Output - how results should look
 Formats, naming conventions, document structures, and recurring preferences for deliverables.
 
+- `areas/<area>/AREA.md` should include and maintain a `References` index of important files, especially under `areas/<area>/context/`, with short descriptions so future agents can target relevant files efficiently.
+
 ## Tools - what to use and how
 Which tools to use or avoid, and how to use them for this role or area.

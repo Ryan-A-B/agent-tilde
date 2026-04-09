@@ -1,6 +1,6 @@
 ---
 name: create-area
-description: Create a new area with a sensible first draft of AREA.md, role memory files, and context scaffolding.
+description: Create a new area with a sensible first draft of AREA.md and context scaffolding.
 ---
 
 # Create Area
@@ -34,18 +34,19 @@ If the user suggests multiple possible names, ask them to choose one.
 
 ## Output
 
-Create this structure:
+This structure will be created by `scripts/create-area.sh`
 
 ```text
 areas/<area>/
   AREA.md
   context/
   roles/
+  repositories/
 ```
 
 Add `.gitkeep` files to empty folders that should exist but do not yet contain real files.
 
-Use `assets/AREA.md` as the template for `areas/<area>/AREA.md`.
+Use `references/AREA.md` as the template for `areas/<area>/AREA.md`.
 Populate it with a sensible first draft based on the user request.
 If some details are unknown, keep the structure and leave only minimal obvious placeholders.
 
@@ -66,12 +67,8 @@ If some details are unknown, leave the structure in place and keep placeholders 
 - Do not scaffold anything until the area name is confirmed.
 
 ## Scaffolding
-- After the user confirms the area name, pipe the generated `AREA.md` content into `scripts/create-area.sh`.
+- After the user confirms the area name, pipe only the generated `AREA.md` body content into `scripts/create-area.sh`.
 - Run the script in this form:
-
-  ```bash
-  <AREA.md content> | <skill dir>/scripts/create-area.sh <area-name> <area-description>
-  ```
-
-- Pass the confirmed area name as the first argument.
-- Pass the full `AREA.md` document on stdin.
+```bash
+<AREA.md body content> | <skill dir>/scripts/create-area.sh <area-name> <area-description>
+```

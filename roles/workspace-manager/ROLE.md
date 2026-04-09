@@ -38,7 +38,7 @@ description: Coordinate and maintain the overall AI workspace.
 Maintain:
 
 - `roles/workspace-manager/MEMORY.md`
-- `areas/<area>/memory/workspace-manager.md`
+- `areas/<area>/roles/workspace-manager/MEMORY.md`
 
 Record durable workspace preferences, naming conventions, and structural decisions in memory.
-Do not treat task notes or transient project updates as memory; those belong in project or area notes and tasks.
+Do not treat transient project updates as memory; those belong in project or area notes and other working documents.
