@@ -1,66 +1,81 @@
 ---
 name: create-role
-description: Draft and scaffold a new broad, non-overlapping role in roles/, showing a proposed ROLE.md in chat first and writing files only after approval.
+description: Create a new role with a sensible first draft of ROLE.md, a MEMORY.md file, and minimal role scaffolding.
 ---
 
 # Create Role
 
-Draft and scaffold a new role under `roles/<role>/`.
+Use this skill when the user wants to create a new role.
 
-## Responsibilities
+A role defines a reusable operating perspective for work, such as product strategist, delivery lead, researcher, or designer. Roles should be durable enough to reuse across multiple areas and projects.
 
-- interview the human before any scaffolding happens
-- encourage broad, stable, non-overlapping role definitions
-- default to a one-shot first draft when the requested role is straightforward
-- display a proposed `ROLE.md` draft before writing files
-- iterate on the draft in conversation until the human is happy
-- create `ROLE.md`, `MEMORY.md`, and `skills/` only after the draft is accepted
-- use `references/examples/` for broad example roles when useful
-- keep `MEMORY.md` static from `skills/create-role/assets/MEMORY.md`
-- call the script only for the final write step after approval
+Use `references/ROLE.md` as the canonical guide for the structure and content of `ROLE.md`.
+
+## Goals
+
+- Create a clear, durable role entrypoint.
+- Keep the first draft simple and reviewable.
+- Scaffold the minimum files needed for the role to be useful immediately.
+- Avoid inventing extra structure unless the user asks for it.
 
 ## Inputs
 
-- role name
-- role description
-- optional initial responsibilities
-- optional initial out-of-scope rules
+Gather or infer the following:
 
-## Interview Guidance
+- Proposed role name.
+- Short description.
+- Any known responsibilities, boundaries, working style, standards, or reference files that should shape the first draft.
 
-Before scaffolding, help the human avoid overly narrow or overlapping roles.
+If the request is straightforward, prefer making a sensible first draft over asking too many questions.
+Only stop to ask questions when the role boundary or purpose is genuinely unclear.
 
-Default behavior:
-
-- if the requested role is broad and clear, draft it directly from the role name and a sensible default scope
-- use `references/examples/` as input when they help
-- show the draft in chat
-- refine it if needed
-- scaffold the role only after the human approves the draft
-
-Do not force a detailed questionnaire for obvious broad roles such as `marketer`, `developer`, `qa`, or `support`.
-
-The interview should aim to clarify:
-
-- what work this role owns
-- what work is explicitly out of scope
-- how this role differs from existing roles
-- whether the proposed role should instead be handled by a skill on an existing broad role
-
-Prefer broad, stable role boundaries such as `developer`, `marketer`, `qa`, or `support`.
-
-Avoid creating roles that are:
-
-- too narrow
-- likely to overlap heavily with an existing role
-- better modeled as skills, workflows, or project-specific memory
-
-Do not push the interview or drafting into the script. The agent should gather the answers only when needed, challenge weak role boundaries, draft the `ROLE.md` in chat, and then call `scripts/create-role.sh` only to write the approved files.
+You must confirm the role name with the user before scaffolding anything.
+If the user suggests multiple possible names, ask them to choose one.
 
 ## Output
 
-Create:
+Create this structure:
 
-- `roles/<role>/ROLE.md`
-- `roles/<role>/MEMORY.md`
-- `roles/<role>/skills/.gitkeep`
+```text
+roles/<role>/
+  ROLE.md
+  MEMORY.md
+```
+
+Use `assets/MEMORY.md` as the template for `roles/<role>/MEMORY.md`.
+If it does not exist, create an empty `MEMORY.md`.
+
+Create `roles/<role>/ROLE.md` as a sensible first draft based on the user request.
+Populate the body sections with a sensible first draft based on the user request.
+If some details are unknown, leave the structure in place and keep placeholders minimal and obvious.
+
+The script is responsible for writing the frontmatter.
+Do not include frontmatter in the generated stdin content.
+
+## Naming
+
+- Prefer names that describe the role, not the current assignee.
+- Preserve established workspace naming conventions when they already exist.
+- Prefer durable names such as `product-strategist`, `delivery-lead`, or `researcher` when the workspace uses kebab-case.
+- If the workspace uses raw names with spaces or another convention, preserve that convention.
+- Do not create overlapping role names unless the user clearly wants them.
+
+## Behavior
+
+- Propose a role name if the user has not given one.
+- Show the proposed role name and draft `ROLE.md` body, and ask the user to confirm them.
+- Do not scaffold anything until the role name is confirmed.
+- Keep the role reusable; avoid overfitting it to a single project unless the user explicitly wants a project-specific role.
+
+## Scaffolding
+
+- After the user confirms the role name, pipe the generated `ROLE.md` body into `scripts/create-role.sh`.
+- Run the script in this form:
+
+  ```bash
+  <ROLE.md body> | <skill dir>/scripts/create-role.sh <role-name> <role-description>
+  ```
+
+- Pass the confirmed role name as the first argument.
+- Pass the short role description as the second argument.
+- Pass only the markdown body on stdin. Do not pass frontmatter.

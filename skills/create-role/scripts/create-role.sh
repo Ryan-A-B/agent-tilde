@@ -1,83 +1,39 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-workspace_root="${1:-.}"
-shift || true
-
-role_name=""
-role_file=""
-
-usage() {
-  cat <<'EOF'
-Usage:
-  create-role.sh <workspace-root> --name <role> --role-file <approved-role-md>
-
-This script performs the final scaffold step only:
-- creates roles/<role>/
-- writes ROLE.md from the approved file
-- copies MEMORY.md from skills/create-role/assets/MEMORY.md
-- creates skills/.gitkeep
-EOF
-}
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --name)
-      role_name="${2:-}"
-      shift 2
-      ;;
-    --role-file)
-      role_file="${2:-}"
-      shift 2
-      ;;
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    *)
-      echo "Unknown argument: $1" >&2
-      usage >&2
-      exit 1
-      ;;
-  esac
-done
-
-slugify() {
-  printf '%s' "$1" \
-    | tr '[:upper:]' '[:lower:]' \
-    | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//; s/-+/-/g'
-}
-
-role_name="$(slugify "$role_name")"
-
-if [[ -z "$role_name" ]]; then
-  echo "Role name cannot be empty." >&2
-  usage >&2
+if [[ $# -lt 2 ]]; then
+  echo "Usage: $0 <role-name> <description>" >&2
   exit 1
 fi
 
-if [[ -z "$role_file" ]]; then
-  echo "Role file is required." >&2
-  usage >&2
-  exit 1
+role_name="$1"
+description="$2"
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+skill_dir="$(cd "$script_dir/.." && pwd)"
+memory_template="$skill_dir/assets/MEMORY.md"
+
+role_dir="roles/$role_name"
+role_file="$role_dir/ROLE.md"
+memory_file="$role_dir/MEMORY.md"
+
+body="$(cat)"
+
+mkdir -p "$role_dir"
+
+if [[ -f "$memory_template" ]]; then
+  cp "$memory_template" "$memory_file"
+else
+  : > "$memory_file"
 fi
 
-if [[ ! -f "$role_file" ]]; then
-  echo "Role file not found: $role_file" >&2
-  exit 1
-fi
+{
+  echo '---'
+  printf 'name: %s\n' "$role_name"
+  printf 'description: %s\n' "$description"
+  echo '---'
+  echo
+  printf '%s\n' "$body"
+} > "$role_file"
 
-role_dir="$workspace_root/roles/$role_name"
-memory_template="$workspace_root/skills/create-role/assets/MEMORY.md"
-
-if [[ -e "$role_dir" ]]; then
-  echo "Role already exists: $role_dir" >&2
-  exit 1
-fi
-
-mkdir -p "$role_dir/skills"
-cp "$role_file" "$role_dir/ROLE.md"
-cp "$memory_template" "$role_dir/MEMORY.md"
-: > "$role_dir/skills/.gitkeep"
-
-printf 'Created role: %s\n' "$role_dir"
+printf 'Scaffolded %s\n' "$role_dir"
